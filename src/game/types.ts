@@ -27,6 +27,8 @@ export interface game{
     upgrades:upgrades,
     playerLevel:number,
     mountain:mountainTypes,
-    lost:boolean
+    lost:boolean,
+    trees:number,
+    treeGrowth:number
 }
 

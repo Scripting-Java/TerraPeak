@@ -24,7 +24,7 @@ export function getWorkerProd(current:game){
     const researchUpgrade = variables.upgrades[current.upgrades.researcher]
     const farmerUpgrade = variables.upgrades[current.upgrades.farmer]
     return{
-        wood:current.population.lumberWorkers*variables.prod.lumberjack*bonus * lumberUpgrade,
+        wood:cutTrees(current)*variables.prod.lumberjack*bonus*lumberUpgrade,
         gas:current.population.researchers*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade,
         peaches:current.population.farmers*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade
     }
@@ -55,4 +55,7 @@ export function getCivPercent(current:game){
 
 export function checkCivReq(current:game):boolean{
     return getCivPercent(current)>=variables.minCivPercent
+}
+export function cutTrees(current:game):number{
+    return Math.min(current.trees,current.population.lumberWorkers)
 }
