@@ -7,7 +7,7 @@ To manage the mountains, you need 3 things:
 - Wood
 - Gas
 - Peaches -> Food
-Each person consumes 1 wood, 0.1 gas, and 2 peaches per 30 seconds.
+Each person consumes 1 wood, 0.1 gas, and 1 peach per 30 seconds.
 You have peach farms, forests, and gas vents.
 You have to manage your population. 
 
