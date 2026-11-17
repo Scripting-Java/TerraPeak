@@ -31,9 +31,7 @@ export function getWorkerProd(current:game){
 }
 
 export function getResConsumption(current:game){
-    const totCiv = current.population.civilians.normal+current.population.civilians.shiny+current.population.civilians.lazy
-    const totWork = current.population.lumberWorkers+current.population.farmers+current.population.researchers
-    const totalPop = totCiv+totWork
+    const totalPop = getTotalPopulation(current)
     return{
         wood:totalPop*variables.consumption.wood,
         gas: totalPop*variables.consumption.gas,
@@ -41,3 +39,20 @@ export function getResConsumption(current:game){
     }
 }
 
+export function getTotalPopulation(current:game):number{
+    const workers = current.population.lumberWorkers+current.population.researchers+current.population.farmers
+    const civs = current.population.civilians.lazy+current.population.civilians.shiny+current.population.civilians.normal
+    return workers+civs
+}
+
+export function getCivPercent(current:game){
+    const totalPop= getTotalPopulation(current)
+    if(totalPop===0)
+        return 0
+    const totCiv = current.population.civilians.normal+current.population.civilians.shiny+current.population.civilians.lazy
+    return totCiv/totalPop *100   
+}
+
+export function checkCivReq(current:game):boolean{
+    return getCivPercent(current)>=variables.minCivPercent
+}
