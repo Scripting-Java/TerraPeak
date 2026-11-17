@@ -1,5 +1,6 @@
 import { variables } from "./values";
 import type { game } from "./types";
+import { mountains } from "./mountains";
 
 export function getCivilianBonus(current:game): number{
     const totCiv = current.population.civilians.normal+current.population.civilians.shiny+current.population.civilians.lazy
@@ -15,12 +16,17 @@ export function getCivilianBonus(current:game): number{
         return (lazyCiv*lazyBonus+normalCiv*normalBonus+shinyCiv*shinyBonus)/totCiv
 }
 
+
 export function getWorkerProd(current:game){
     const bonus = getCivilianBonus(current)
+    const mountain = mountains.find(m=>m.name===current.mountain)!
+    const lumberUpgrade = variables.upgrades[current.upgrades.lumberjack]
+    const researchUpgrade = variables.upgrades[current.upgrades.researcher]
+    const farmerUpgrade = variables.upgrades[current.upgrades.farmer]
     return{
-        wood:current.population.lumberWorkers*variables.prod.lumberjack*bonus,
-        gas:current.population.researchers*variables.prod.researcher*bonus,
-        peaches:current.population.farmers*variables.prod.farmer*bonus
+        wood:current.population.lumberWorkers*variables.prod.lumberjack*bonus * lumberUpgrade,
+        gas:current.population.researchers*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade,
+        peaches:current.population.farmers*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade
     }
 }
 
@@ -34,3 +40,4 @@ export function getResConsumption(current:game){
         peaches:totalPop*variables.consumption.peaches
     }
 }
+
