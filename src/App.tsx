@@ -86,15 +86,14 @@ function App() {
       <button onClick={() => handlePopulation("farmer", 1)}>Add farmers</button>
       <button onClick={() => handlePopulation("farmer", -1)}>Subtract farmer</button>
       <p>{current.population.farmers} farmers</p>
-      <button onClick={()=>handleCycle()}>Run A Cycle</button>
+      <button onClick={handleCycle}>Run A Cycle</button>
       <h2>Resources</h2>
       <p>Wood: {current.resources.wood}</p>
       <p>Gas: {current.resources.gas}</p>
       <p>Peaches: {current.resources.peaches}</p>
-      <p>Still Alive: {!current.lost}</p>
+      <p>Still Alive: {String(!current.lost)}</p>
       <h2>Mountain: {current.mountain}</h2>
     </div>
   )
 }
-
 export default App
