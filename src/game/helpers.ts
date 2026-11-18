@@ -38,10 +38,15 @@ export function getResConsumption(current:game){
         peaches:totalPop*variables.consumption.peaches
     }
 }
-
+export function getTotalWorkers(current:game):number{
+    return current.population.lumberWorkers+current.population.researchers+current.population.farmers
+}
+export function getTotalCivs(current:game):number{
+    return current.population.civilians.lazy+current.population.civilians.shiny+current.population.civilians.normal
+}
 export function getTotalPopulation(current:game):number{
-    const workers = current.population.lumberWorkers+current.population.researchers+current.population.farmers
-    const civs = current.population.civilians.lazy+current.population.civilians.shiny+current.population.civilians.normal
+    const workers = getTotalWorkers(current)
+    const civs = getTotalCivs(current)
     return workers+civs
 }
 
