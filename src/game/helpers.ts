@@ -25,8 +25,8 @@ export function getWorkerProd(current:game){
     const farmerUpgrade = variables.upgrades[current.upgrades.farmer]
     return{
         wood:cutTrees(current)*variables.prod.lumberjack*bonus*lumberUpgrade,
-        gas:current.population.researchers*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade,
-        peaches:current.population.farmers*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade
+        gas:current.population.researcher*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade,
+        peaches:current.population.farmer*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade
     }
 }
 
@@ -39,7 +39,7 @@ export function getResConsumption(current:game){
     }
 }
 export function getTotalWorkers(current:game):number{
-    return current.population.lumberWorkers+current.population.researchers+current.population.farmers
+    return current.population.lumberjack+current.population.researcher+current.population.farmer
 }
 export function getTotalCivs(current:game):number{
     return current.population.civilians.lazy+current.population.civilians.shiny+current.population.civilians.normal
@@ -62,5 +62,5 @@ export function checkCivReq(current:game):boolean{
     return getCivPercent(current)>=variables.minCivPercent
 }
 export function cutTrees(current:game):number{
-    return Math.min(current.trees,current.population.lumberWorkers)
+    return Math.min(current.trees,current.population.lumberjack)
 }

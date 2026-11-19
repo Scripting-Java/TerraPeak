@@ -1,7 +1,9 @@
 import { cutTrees, getResConsumption, getWorkerProd } from "./helpers";
-import type { game, civilian } from "./types";
+import type { game, civilian, workerType } from "./types";
 import { variables } from "./values";
 import { mountains } from "./mountains";
+
+
 
 export function recycleCiv(current:game): game{
     const totCiv = current.population.civilians.normal+current.population.civilians.shiny+current.population.civilians.lazy
@@ -20,7 +22,6 @@ export function recycleCiv(current:game): game{
     }
     
 }
-
 
 export function runCycle(current:game):game{
     if(current.lost)
@@ -46,6 +47,23 @@ export function runCycle(current:game):game{
     return {...recycleCiv(game), lost:lost}
 }
 
-
-
-
+export function handlePop(current:game, type: civilian | workerType, amt: number){
+    //civilian handler
+    if(type==="lazy"||type==="normal"||type==="shiny"){
+        //new num of people
+        const newAmt = current.population.civilians[type]+amt
+        //if you're reading this, this prevents negative people
+        if(newAmt<0)
+            return current
+        return {
+            ...current, population:{...current.population,
+                civilians:{...current.population.civilians, [type]:newAmt}
+            }
+        }
+    }
+    //worker handler w/ same logic as above
+    const newAmt = current.population[type]+amt
+    if(newAmt<0)
+        return current
+    return{...current,population:{...current.population,[type]:newAmt}}
+}
