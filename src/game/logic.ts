@@ -89,6 +89,6 @@ export function handleUpgrades(current: game, type: workerType): game{
     //return upgrade
     const cost = costs[level]
     if (current.resources[resourceType] >= costs[level])
-        return {...current,resources:{...current.resources, [resourceType]:current.resources[resourceType]-=cost}, upgrades:{...current.upgrades, [type]: level+1}}
+        return {...current,resources:{...current.resources, [resourceType]:current.resources[resourceType]-cost}, upgrades:{...current.upgrades, [type]: level+1}}
     return current
 }
