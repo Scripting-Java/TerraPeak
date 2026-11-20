@@ -25,6 +25,10 @@ export const variables = {
         lazy:0.98,
     },
     //controls contributions of a civilian
-    upgrades: [1,1.1,1.25,1.45]
+    upgrades: [1,1.1,1.25,1.45],
     //controls each upgrade level later
+    lumberjackUpgradeCosts: [20,40,80],
+    farmerUpgradeCosts: [30,50,100],
+    researcherUpgradeCosts:[15, 40, 75]
+    //tentative upgrade costs
 }

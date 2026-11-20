@@ -16,7 +16,6 @@ export function getCivilianBonus(current:game): number{
         return (lazyCiv*lazyBonus+normalCiv*normalBonus+shinyCiv*shinyBonus)/totCiv
 }
 
-
 export function getWorkerProd(current:game){
     const bonus = getCivilianBonus(current)
     const mountain = mountains.find(m=>m.name===current.mountain)!
@@ -38,12 +37,15 @@ export function getResConsumption(current:game){
         peaches:totalPop*variables.consumption.peaches
     }
 }
+
 export function getTotalWorkers(current:game):number{
     return current.population.lumberjack+current.population.researcher+current.population.farmer
 }
+
 export function getTotalCivs(current:game):number{
     return current.population.civilians.lazy+current.population.civilians.shiny+current.population.civilians.normal
 }
+
 export function getTotalPopulation(current:game):number{
     const workers = getTotalWorkers(current)
     const civs = getTotalCivs(current)
@@ -61,6 +63,7 @@ export function getCivPercent(current:game){
 export function checkCivReq(current:game):boolean{
     return getCivPercent(current)>=variables.minCivPercent
 }
+
 export function cutTrees(current:game):number{
     return Math.min(current.trees,current.population.lumberjack)
 }
