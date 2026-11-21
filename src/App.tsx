@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import './App.css'
-import { civTypes, workTypes, type civilian, type game, type workerType } from './game/types'
+import { civTypes, workTypes, type civilian, type game, type mountainTypes, type workerType } from './game/types'
 import { getTotalPopulation } from './game/helpers'
-import { handlePop, handleUpgrades, runCycle } from './game/logic'
+import { handleMountain, handlePop, handleUpgrades, runCycle } from './game/logic'
 import { create } from './game/initial'
 import { variables } from './game/values'
+import { mountains } from './game/mountains'
+
 function App() {
 
   const [current, setCurrent] = useState<game>(() => create())
@@ -22,6 +24,10 @@ function App() {
     setCurrent(prev => handleUpgrades(prev, type))
   }
 
+  function handleMountains(mountain: mountainTypes) {
+    setCurrent(prev => handleMountain(prev, mountain))
+  }
+
 
   return (
     <div>
@@ -37,6 +43,7 @@ function App() {
           </div>
         ))}
       </details>
+
       <details className='civs'>
         <summary>Workers</summary>
         {workTypes.map(type => (
@@ -53,6 +60,7 @@ function App() {
       </details>
 
       <button className='civsButton' onClick={handleCycle}>Press Me To Run A Cycle</button>
+
       <details className='civs'>
         <summary>Resources</summary>
         <p>Wood: {current.resources.wood}</p>
@@ -60,6 +68,30 @@ function App() {
         <p>Peaches: {current.resources.peaches}</p>
         <p>Still Alive: {String(!current.lost)}</p>
         <h2>Mountain: {current.mountain}</h2>
+      </details>
+
+      <details className='civs'>
+        <summary>Mountains</summary>
+        {mountains.map((mountain, index) => {
+          const mountUnlocked = getTotalPopulation(current) >= variables.mountainReqs[index]
+          return (
+            <div key={mountain.name}>
+              <details>
+              <summary>{mountain.name}</summary>
+              <p>Population Required: {variables.mountainReqs[index]}</p>
+              <p>Trees: {mountain.trees}</p>
+              <p>Gas Vents: {mountain.gasVents}</p>
+              <p>Peach Farms: {mountain.peachFarms}</p>
+              {current.mountain === mountain.name ? 
+              (<p>Current Location</p>) :
+                  (
+                  <button disabled={!mountUnlocked} onClick={() => handleMountains(mountain.name)}>
+                  {mountUnlocked ? "Travel Here" : "Locked"}</button>
+                  )           
+              }
+              </details>
+              </div>)
+        })}
       </details>
     </div>
   )

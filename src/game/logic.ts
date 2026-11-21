@@ -1,5 +1,5 @@
-import { cutTrees, getResConsumption, getWorkerProd } from "./helpers";
-import type { game, civilian, workerType, resourceType } from "./types";
+import { cutTrees, getResConsumption, getTotalPopulation, getWorkerProd } from "./helpers";
+import type { game, civilian, workerType, resourceType, mountainTypes } from "./types";
 import { variables } from "./values";
 import { mountains } from "./mountains";
 
@@ -69,7 +69,7 @@ export function handlePop(current: game, type: civilian | workerType, amt: numbe
     return { ...current, population: { ...current.population, [type]: newAmt } }
 }
 
-export function handleUpgrades(current: game, type: workerType): game{
+export function handleUpgrades(current: game, type: workerType): game {
     const level = current.upgrades[type]
     let resourceType: resourceType = "wood"
     let costs: number[] = variables.lumberjackUpgradeCosts
@@ -84,11 +84,24 @@ export function handleUpgrades(current: game, type: workerType): game{
         costs = variables.researcherUpgradeCosts
     }
     //is it already max level?
-    if (level>=costs.length)
+    if (level >= costs.length)
         return current
     //return upgrade
     const cost = costs[level]
     if (current.resources[resourceType] >= costs[level])
-        return {...current,resources:{...current.resources, [resourceType]:current.resources[resourceType]-cost}, upgrades:{...current.upgrades, [type]: level+1}}
+        return { ...current, resources: { ...current.resources, [resourceType]: current.resources[resourceType] - cost }, upgrades: { ...current.upgrades, [type]: level + 1 } }
     return current
+}
+
+export function handleMountain(current: game, mount: mountainTypes) {
+    const index = mountains.findIndex(m => m.name === mount)
+    if (index === -1)
+        return current
+
+    const req = variables.mountainReqs[index]
+
+    if (getTotalPopulation(current) < req)
+        return current
+    const newMount = mountains[index]
+    return { ...current, mountain: newMount.name, trees: newMount.trees, treeGrowth: 0 }
 }

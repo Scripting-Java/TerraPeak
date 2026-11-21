@@ -67,3 +67,19 @@ export function checkCivReq(current:game):boolean{
 export function cutTrees(current:game):number{
     return Math.min(current.trees,current.population.lumberjack)
 }
+
+export function handleWeather(){
+    const climates = variables.weather
+    const ind = Math.random()*climates.length
+    const weather = climates[ind]
+    if(weather==="rainy")
+      return {farmers:1.1, lumberjacks:1.1,researcher:0.9}  
+    if(weather==="stormy")
+        return {farmers:0.9,lumberjacks:0.9,researcher:0.9}
+    if(weather==="cloudy")
+        return {farmers:0.9,lumberjacks:1.05,researcher:1.1}
+    if(weather==="sunny")
+        return  {farmers:0.9,lumberjacks:0.9,researcher:0.9}
+    if(weather==="subZero")
+        return  {farmers:0.6,lumberjacks:0.8,researcher:1.5}
+}

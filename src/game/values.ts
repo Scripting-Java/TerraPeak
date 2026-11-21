@@ -1,3 +1,5 @@
+import { mountains } from "./mountains";
+
 export const variables = {
     cycleTime: 30000,
     //That's 30 seconds(so one cycle where people get hungry)
@@ -8,15 +10,15 @@ export const variables = {
     minCivPercent:10,
     //minimum civillain percent
     consumption:{
-        wood:1,
+        wood:0.75,
         gas:0.1,
-        peaches:1
+        peaches:0.75
     },
     //controls how many resources on person uses during a cycle
     prod:{
-        lumberjack:1,
-        researcher:0.5,
-        farmer:2
+        lumberjack:3,
+        researcher:0.3,
+        farmer:3
     },
     //controls resources produced per worker
     civBonuses:{
@@ -29,6 +31,11 @@ export const variables = {
     //controls each upgrade level later
     lumberjackUpgradeCosts: [20,40,80],
     farmerUpgradeCosts: [30,50,100],
-    researcherUpgradeCosts:[15, 40, 75]
+    researcherUpgradeCosts:[15, 40, 75],
     //tentative upgrade costs
+    mountainReqs: [0,15,30,50,75,100],
+    //population reqs for new mountains
+    mountainBuffs: [1,1.2,1.4,1.8,2.5,3.5],
+    weather:["rainy","stormy","sunny","cloudy","subZero"],
+    
 }
