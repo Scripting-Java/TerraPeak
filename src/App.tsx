@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { civTypes, workTypes, type civilian, type game, type mountainTypes, type workerType } from './game/types'
 import { getTotalPopulation } from './game/helpers'
-import { handleMountain, handlePop, handleUpgrades, runCycle } from './game/logic'
+import { handleMountain, handlePop, handleUpgrades, handleWeather, runCycle } from './game/logic'
 import { create } from './game/initial'
 import { variables } from './game/values'
 import { mountains } from './game/mountains'
@@ -10,7 +10,6 @@ import { mountains } from './game/mountains'
 function App() {
 
   const [current, setCurrent] = useState<game>(() => create())
-
 
   function handleCycle() {
     setCurrent(prev => runCycle(prev))
@@ -33,6 +32,16 @@ function App() {
     <div>
       <h1 className='people'>People</h1>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
+      
+      <details className='civs'>
+        <summary>Weather: {current.weather.weather}</summary>
+        <p>Farmer Buffs: {current.weather.buffs.farmers}</p>
+        <p>Lumberjack Buffs: {current.weather.buffs.lumberjacks}</p>
+        <p>Researcher Buffs: {current.weather.buffs.researcher}</p>
+      </details>
+      
+      
+      
       <details className='civs'>
         <summary>Civilians</summary>
         {civTypes.map(type => (

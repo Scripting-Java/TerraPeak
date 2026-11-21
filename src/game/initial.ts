@@ -1,5 +1,6 @@
 import type { game } from "./types";
 import { mountains } from "./mountains";
+import { handleWeather } from "./logic";
 
 export function create(): game{
     return {
@@ -13,6 +14,7 @@ export function create(): game{
         mountain: "Washington",
         trees: mountains[0].trees,
         treeGrowth: 0,
-        lost: false
+        lost: false,
+        weather:handleWeather()
     }
 }

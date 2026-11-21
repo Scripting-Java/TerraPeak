@@ -22,7 +22,10 @@ export interface population{
     farmer:number,
     civilians:Record<civilian,number>,
 }
-
+export interface weather{
+    buffs:{farmers:number,lumberjacks:number,researcher:number},
+    weather:string
+}
 export interface game{
     population:population,
     resources:resources,
@@ -31,6 +34,7 @@ export interface game{
     mountain:mountainTypes,
     lost:boolean,
     trees:number,
-    treeGrowth:number
+    treeGrowth:number,
+    weather: weather
 }
 

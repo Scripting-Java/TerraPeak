@@ -1,5 +1,5 @@
 import { variables } from "./values";
-import type { game } from "./types";
+import type { game, weather } from "./types";
 import { mountains } from "./mountains";
 
 export function getCivilianBonus(current:game): number{
@@ -16,16 +16,16 @@ export function getCivilianBonus(current:game): number{
         return (lazyCiv*lazyBonus+normalCiv*normalBonus+shinyCiv*shinyBonus)/totCiv
 }
 
-export function getWorkerProd(current:game){
+export function getWorkerProd(current:game, weather:weather){
     const bonus = getCivilianBonus(current)
     const mountain = mountains.find(m=>m.name===current.mountain)!
     const lumberUpgrade = variables.upgrades[current.upgrades.lumberjack]
     const researchUpgrade = variables.upgrades[current.upgrades.researcher]
     const farmerUpgrade = variables.upgrades[current.upgrades.farmer]
     return{
-        wood:cutTrees(current)*variables.prod.lumberjack*bonus*lumberUpgrade,
-        gas:current.population.researcher*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade,
-        peaches:current.population.farmer*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade
+        wood:cutTrees(current)*variables.prod.lumberjack*bonus*lumberUpgrade*weather.buffs.lumberjacks,
+        gas:current.population.researcher*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade*weather.buffs.researcher,
+        peaches:current.population.farmer*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade*weather.buffs.farmers
     }
 }
 
@@ -68,10 +68,7 @@ export function cutTrees(current:game):number{
     return Math.min(current.trees,current.population.lumberjack)
 }
 
-export function handleWeather(){
-    const climates = variables.weather
-    const ind = Math.random()*climates.length
-    const weather = climates[ind]
+export function helpHandleWeather(weather:string){
     if(weather==="rainy")
       return {farmers:1.1, lumberjacks:1.1,researcher:0.9}  
     if(weather==="stormy")
@@ -82,4 +79,5 @@ export function handleWeather(){
         return  {farmers:0.9,lumberjacks:0.9,researcher:0.9}
     if(weather==="subZero")
         return  {farmers:0.6,lumberjacks:0.8,researcher:1.5}
+    return {farmers:1,lumberjacks:1,researcher:1}
 }

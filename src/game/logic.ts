@@ -1,4 +1,4 @@
-import { cutTrees, getResConsumption, getTotalPopulation, getWorkerProd } from "./helpers";
+import { cutTrees, getResConsumption, getTotalPopulation, getWorkerProd, helpHandleWeather } from "./helpers";
 import type { game, civilian, workerType, resourceType, mountainTypes } from "./types";
 import { variables } from "./values";
 import { mountains } from "./mountains";
@@ -26,7 +26,7 @@ export function recycleCiv(current: game): game {
 export function runCycle(current: game): game {
     if (current.lost)
         return current
-    const prod = getWorkerProd(current)
+    const prod = getWorkerProd(current, current.weather)
     const consumption = getResConsumption(current)
     const cut = cutTrees(current)
     let trees = current.trees - cut
@@ -104,4 +104,12 @@ export function handleMountain(current: game, mount: mountainTypes) {
         return current
     const newMount = mountains[index]
     return { ...current, mountain: newMount.name, trees: newMount.trees, treeGrowth: 0 }
+}
+
+export function handleWeather(){
+    const climates = variables.weather
+    const ind = Math.floor(Math.random()*climates.length)
+    const weather = climates[ind]
+    const buffs = helpHandleWeather(weather)
+    return {weather, buffs}
 }
