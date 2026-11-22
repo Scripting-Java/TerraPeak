@@ -38,3 +38,9 @@
 .sidebarButton button.active {
     outline: 2px solid white;
 }
+.sidebarInfo{
+    position:fixed;
+    left:150px;
+    top:20%;
+    margin-left:10px;
+}

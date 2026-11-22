@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div>
-      <Sidebar></Sidebar>
+      <Sidebar current={current} production={production} onPopChange={handlePopulation} onUpgrade={handleUpgrade} onMountain={handleMountains}></Sidebar>
       <h1 className='people'>People</h1>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
       <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
