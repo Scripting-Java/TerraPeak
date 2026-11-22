@@ -45,17 +45,6 @@ function App() {
       </details>
 
       <details className='civs'>
-        <summary>Civilians</summary>
-        {civTypes.map(type => (
-          <div key={type}>
-            <button onClick={() => handlePopulation(type, 1)}>Add {type}</button>
-            <button onClick={() => handlePopulation(type, -1)}>Subtract {type}</button>
-            <p>{current.population.civilians[type]} {type} civilians</p>
-          </div>
-        ))}
-      </details>
-
-      <details className='civs'>
         <summary>Workers</summary>
         {workTypes.map(type => {
           const costs = type === "lumberjack" ? variables.lumberjackUpgradeCosts :

@@ -3,7 +3,7 @@ export const variables = {
     //That's 30 seconds(so one cycle where people get hungry)
     treeTime: 60000,
     //60 seconds for trees to regrow
-    startingPop: 10,
+    startingPop: 20,
     //starting population
     minCivPercent:10,
     //minimum civillain percent
