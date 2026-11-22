@@ -1,5 +1,3 @@
-import { mountains } from "./mountains";
-
 export const variables = {
     cycleTime: 30000,
     //That's 30 seconds(so one cycle where people get hungry)

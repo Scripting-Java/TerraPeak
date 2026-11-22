@@ -33,7 +33,7 @@ function App() {
     <div>
       <h1 className='people'>People</h1>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
-      <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m=>m.name===current.mountain)]*100}%</h2>
+      <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)] * 100}%</h2>
       <details className='civs'>
         <summary>Weather: {current.weather.weather}</summary>
         <p>Farmer Buffs: {current.weather.buffs.farmers}</p>
@@ -54,26 +54,27 @@ function App() {
 
       <details className='civs'>
         <summary>Workers</summary>
-        {workTypes.map(type => (
-          <div key={type}>
-            <button onClick={() => handlePopulation(type, 1)}>Add {type}</button>
-            <button onClick={() => handlePopulation(type, -1)}>Subtract {type}</button>
-            <p>{current.population[type]} {type} workers</p>
-            <button onClick={() => handleUpgrade(type)}>Upgrade {type}</button>
-            <details>
-            <summary>Upgrade Menus!</summary>
-            <p>Production bonus: {variables.upgrades[current.upgrades[type]]}</p>
-            <p>Upgrade Level: {current.upgrades[type]}</p>
-            <p>Upgrade Cost: 
-            {
-              type === "lumberjack" ? variables.lumberjackUpgradeCosts[current.upgrades[type]]
-              : type === "farmer" ? variables.farmerUpgradeCosts[current.upgrades[type]]
-              : variables.researcherUpgradeCosts[current.upgrades[type]]
-            } {type==="lumberjack" ? "Wood": type==="farmer" ? "Peaches": "Gas"}
-            </p>
-            </details>
-          </div>
-        ))}
+        {workTypes.map(type => {
+          const costs = type === "lumberjack" ? variables.lumberjackUpgradeCosts :
+            type === "farmer" ? variables.farmerUpgradeCosts :
+              variables.researcherUpgradeCosts
+          const upgradeCost = costs[current.upgrades[type]]
+          const material = type === "lumberjack" ? "Wood" : type === "farmer" ? "Peaches" : "Gas"
+          return (
+            <div key={type}>
+              <button onClick={() => handlePopulation(type, 1)}>Add {type}</button>
+              <button onClick={() => handlePopulation(type, -1)}>Subtract {type}</button>
+              <p>{current.population[type]} {type} workers</p>
+              <button onClick={() => handleUpgrade(type)} disabled={upgradeCost===undefined}>Upgrade {type}</button>
+              <details>
+                <summary>Upgrade Menus!</summary>
+                <p>Production bonus: {variables.upgrades[current.upgrades[type]]}</p>
+                <p>Upgrade Level: {current.upgrades[type]}</p>
+                <p>Upgrade Cost: {upgradeCost === undefined ? ("Max Level") : (`${upgradeCost} ${material}`)}</p>
+              </details>
+            </div>
+          )
+        })}
       </details>
 
       <details className='civs'>
@@ -82,19 +83,19 @@ function App() {
           <summary>Wood</summary>
           <p>Produced: {production.wood.toFixed(2)}</p>
           <p>Consumed: {(getResConsumption(current).wood).toFixed(2)}</p>
-          <p>Net: {(production.wood-getResConsumption(current).wood).toFixed(2)}</p>
+          <p>Net: {(production.wood - getResConsumption(current).wood).toFixed(2)}</p>
         </details>
         <details className='civs'>
           <summary>Gas</summary>
           <p>Produced: {production.gas.toFixed(2)}</p>
           <p>Consumed: {(getResConsumption(current).gas).toFixed(2)}</p>
-          <p>Net: {(production.gas-getResConsumption(current).gas).toFixed(2)}</p>
+          <p>Net: {(production.gas - getResConsumption(current).gas).toFixed(2)}</p>
         </details>
         <details className='civs'>
           <summary>Peaches</summary>
           <p>Produced: {production.peaches.toFixed(2)}</p>
           <p>Consumed: {(getResConsumption(current).peaches).toFixed(2)}</p>
-          <p>Net: {(production.peaches-getResConsumption(current).peaches).toFixed(2)}</p>
+          <p>Net: {(production.peaches - getResConsumption(current).peaches).toFixed(2)}</p>
         </details>
       </details>
 
