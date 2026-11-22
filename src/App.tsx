@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { civTypes, workTypes, type civilian, type game, type mountainTypes, type workerType } from './game/types'
 import { getResConsumption, getTotalPopulation, getWorkerProd } from './game/helpers'
-import { handleMountain, handlePop, handleUpgrades, handleWeather, runCycle } from './game/logic'
+import { handleMountain, handlePop, handleUpgrades, runCycle } from './game/logic'
 import { create } from './game/initial'
 import { variables } from './game/values'
 import { mountains } from './game/mountains'
@@ -33,7 +33,7 @@ function App() {
     <div>
       <h1 className='people'>People</h1>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
-      <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)] * 100}%</h2>
+      <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
       <details className='civs'>
         <summary>Weather: {current.weather.weather}</summary>
         <p>Farmer Buffs: {current.weather.buffs.farmers}</p>
@@ -59,13 +59,13 @@ function App() {
             type === "farmer" ? variables.farmerUpgradeCosts :
               variables.researcherUpgradeCosts
           const upgradeCost = costs[current.upgrades[type]]
-          const material = type === "lumberjack" ? "Wood" : type === "farmer" ? "Peaches" : "Gas"
+          const material = type === "lumberjack" ? "wood" : type === "farmer" ? "peaches" : "gas"
           return (
             <div key={type}>
               <button onClick={() => handlePopulation(type, 1)}>Add {type}</button>
               <button onClick={() => handlePopulation(type, -1)}>Subtract {type}</button>
               <p>{current.population[type]} {type} workers</p>
-              <button onClick={() => handleUpgrade(type)} disabled={upgradeCost===undefined}>Upgrade {type}</button>
+              <button onClick={() => handleUpgrade(type)} disabled={upgradeCost===undefined||current.resources[material]<upgradeCost}>Upgrade {type}</button>
               <details>
                 <summary>Upgrade Menus!</summary>
                 <p>Production bonus: {variables.upgrades[current.upgrades[type]]}</p>

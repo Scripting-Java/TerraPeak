@@ -42,7 +42,7 @@ export function runCycle(current: game): game {
         gas: current.resources.gas + prod.gas - consumption.gas,
         peaches: current.resources.peaches + prod.peaches - consumption.peaches
     }
-    const game = { ...current, resources: resources, trees, treeGrowth }
+    const game = { ...current, resources: resources, trees, treeGrowth, weather: handleWeather() }
     const lost = current.lost || resources.wood < 0 || resources.gas < 0 || resources.peaches < 0
     return { ...recycleCiv(game), lost: lost }
 }
