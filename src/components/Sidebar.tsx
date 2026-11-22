@@ -3,6 +3,7 @@ import type { civilian, game, mountainTypes, resources, workerType } from "../ga
 import {Users, Package, ChartNoAxesCombined, ArrowUpCircle, Mountain, Pickaxe, Trees} from "lucide-react"
 import "./Sidebar.css"
 import { Civilians } from "./sideComponents/Civilians/Civilians";
+import { Workers } from "./sideComponents/Workers/Workers";
 
 interface Sidebar{
     current:game,
@@ -29,6 +30,7 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
             </div>
             <div className="sidebarInfo">
                 {active==="civilians" && <Civilians current={current}></Civilians>}
+                {active==="workers" && (<Workers current={current} onPopChange={onPopChange} onUpgrade={onUpgrade}></Workers>)}
             </div>
         </div>
     )
