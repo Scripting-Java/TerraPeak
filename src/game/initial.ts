@@ -14,7 +14,7 @@ export function create(): game{
         playerLevel: 1,
         mountain: "Washington",
         trees: mountains[0].trees,
-        treeGrowth: 0,
+        treeGrowth: [],
         lost: false,
         weather:handleWeather()
     }

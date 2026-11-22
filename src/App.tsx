@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { civTypes, workTypes, type civilian, type game, type mountainTypes, type workerType } from './game/types'
+import { workTypes, type game, type mountainTypes, type workerType } from './game/types'
 import { getResConsumption, getTotalPopulation, getWorkerProd } from './game/helpers'
 import { handleMountain, handlePop, handleUpgrades, runCycle } from './game/logic'
 import { create } from './game/initial'
@@ -17,7 +17,7 @@ function App() {
     setCurrent(prev => runCycle(prev))
   }
 
-  function handlePopulation(type: civilian | workerType, amt: number) {
+  function handlePopulation(type: workerType, amt: number) {
     setCurrent(prev => handlePop(prev, type, amt))
   }
 

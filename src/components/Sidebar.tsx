@@ -7,7 +7,7 @@ import { Civilians } from "./sideComponents/Civilians/Civilians";
 interface Sidebar{
     current:game,
     production: resources,
-    onPopChange:(type:workerType|civilian, amt:number)=>void,
+    onPopChange:(type:workerType, amt:number)=>void,
     onUpgrade:(type:workerType)=>void,
     onMountain:(mountain:mountainTypes)=>void
 }

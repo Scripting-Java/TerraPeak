@@ -29,14 +29,20 @@ export function runCycle(current: game): game {
     const prod = getWorkerProd(current, current.weather)
     const consumption = getResConsumption(current)
     const cut = cutTrees(current)
-    let trees = current.trees - cut
-    let treeGrowth = current.treeGrowth + variables.cycleTime
-    const mountain = mountains.find(m => m.name === current.mountain)!
-    while (treeGrowth >= variables.treeTime && trees < mountain.trees) {
-        if (trees < mountain.trees)
-            trees++
-        treeGrowth -= variables.treeTime
+    let trees = current.trees-cut
+    const mountain = mountains.find(m=>m.name===current.mountain)!
+    //timers for trees just cut
+    const timers:number[] = []
+    for(let i =0; i<cut;i++){
+        timers.push(variables.treeTime)
     }
+    //reduce all timers
+    const updateTimers = current.treeGrowth.map(timer=>timer-variables.cycleTime)
+    let treeGrowth = [...updateTimers,...timers]
+    //trees that finished growing
+    const grown = treeGrowth.filter(timer=>timer<=0).length
+    trees = Math.min(mountain.trees,trees+grown)
+    treeGrowth=treeGrowth.filter(timer=>timer>0)
     const resources = {
         wood: current.resources.wood + prod.wood - consumption.wood,
         gas: current.resources.gas + prod.gas - consumption.gas,
@@ -143,7 +149,7 @@ export function handleMountain(current: game, mount: mountainTypes) {
     if (getTotalPopulation(current) < req)
         return current
     const newMount = mountains[index]
-    return { ...current, mountain: newMount.name, trees: newMount.trees, treeGrowth: 0 }
+    return { ...current, mountain: newMount.name, trees: newMount.trees, treeGrowth: [] }
 }
 
 export function handleWeather() {

@@ -34,7 +34,7 @@ export interface game{
     mountain:mountainTypes,
     lost:boolean,
     trees:number,
-    treeGrowth:number,
+    treeGrowth:number[],
     weather: weather
 }
 
