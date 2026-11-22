@@ -6,6 +6,7 @@ import { handleMountain, handlePop, handleUpgrades, runCycle } from './game/logi
 import { create } from './game/initial'
 import { variables } from './game/values'
 import { mountains } from './game/mountains'
+import { Sidebar } from './components/Sidebar'
 
 function App() {
 
@@ -31,9 +32,11 @@ function App() {
 
   return (
     <div>
+      <Sidebar></Sidebar>
       <h1 className='people'>People</h1>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
       <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
+      <h2>Still Alive: {String(!current.lost)}</h2>
       <details className='civs'>
         <summary>Weather: {current.weather.weather}</summary>
         <p>Farmer Buffs: {current.weather.buffs.farmers}</p>
@@ -106,7 +109,6 @@ function App() {
         <p>Wood: {current.resources.wood}</p>
         <p>Gas: {current.resources.gas}</p>
         <p>Peaches: {current.resources.peaches}</p>
-        <p>Still Alive: {String(!current.lost)}</p>
         <h2>Mountain: {current.mountain}</h2>
       </details>
 
