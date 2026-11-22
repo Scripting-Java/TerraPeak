@@ -18,14 +18,16 @@ export function getCivilianBonus(current:game): number{
 
 export function getWorkerProd(current:game, weather:weather){
     const bonus = getCivilianBonus(current)
-    const mountain = mountains.find(m=>m.name===current.mountain)!
+    const mountIndex = mountains.findIndex(m=>m.name===current.mountain)
+    const mountain = mountains[mountIndex]
+    const mountBuff = variables.mountainBuffs[mountIndex]
     const lumberUpgrade = variables.upgrades[current.upgrades.lumberjack]
     const researchUpgrade = variables.upgrades[current.upgrades.researcher]
     const farmerUpgrade = variables.upgrades[current.upgrades.farmer]
     return{
-        wood:cutTrees(current)*variables.prod.lumberjack*bonus*lumberUpgrade*weather.buffs.lumberjacks,
-        gas:current.population.researcher*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade*weather.buffs.researcher,
-        peaches:current.population.farmer*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade*weather.buffs.farmers
+        wood:cutTrees(current)*variables.prod.lumberjack*bonus*lumberUpgrade*weather.buffs.lumberjacks*mountBuff,
+        gas:current.population.researcher*variables.prod.researcher*bonus*mountain.gasVents * researchUpgrade*weather.buffs.researcher*mountBuff,
+        peaches:current.population.farmer*variables.prod.farmer*bonus*mountain.peachFarms * farmerUpgrade*weather.buffs.farmers*mountBuff
     }
 }
 
