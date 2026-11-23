@@ -4,6 +4,7 @@ import {Users, Package, ChartNoAxesCombined, ArrowUpCircle, Mountain, Pickaxe, T
 import "./Sidebar.css"
 import { Civilians } from "./sideComponents/Civilians/Civilians";
 import { Workers } from "./sideComponents/Workers/Workers";
+import { Forest } from "./Forest/Forest";
 
 interface Sidebar{
     current:game,
@@ -30,7 +31,8 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
             </div>
             <div className="sidebarInfo">
                 {active==="civilians" && <Civilians current={current}></Civilians>}
-                {active==="workers" && (<Workers current={current} onPopChange={onPopChange} onUpgrade={onUpgrade}></Workers>)}
+                {active==="workers" && <Workers current={current} onPopChange={onPopChange} onUpgrade={onUpgrade}></Workers>}
+                {active==="forests"&& <Forest current={current}></Forest>}
             </div>
         </div>
     )

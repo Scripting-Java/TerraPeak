@@ -1,0 +1,16 @@
+.forest{
+    background-color: #263238;
+    padding: 15px;
+    border-radius: 15px;
+    color:white;
+}
+.forest h2{
+    margin-top:0
+}
+
+.forest p{
+    background-color: #46565e;
+    padding:10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}

@@ -45,31 +45,6 @@ function App() {
       </details>
 
       <details className='civs'>
-        <summary>Workers</summary>
-        {workTypes.map(type => {
-          const costs = type === "lumberjack" ? variables.lumberjackUpgradeCosts :
-            type === "farmer" ? variables.farmerUpgradeCosts :
-              variables.researcherUpgradeCosts
-          const upgradeCost = costs[current.upgrades[type]]
-          const material = type === "lumberjack" ? "wood" : type === "farmer" ? "peaches" : "gas"
-          return (
-            <div key={type}>
-              <button onClick={() => handlePopulation(type, 1)}>Add {type}</button>
-              <button onClick={() => handlePopulation(type, -1)}>Subtract {type}</button>
-              <p>{current.population[type]} {type} workers</p>
-              <button onClick={() => handleUpgrade(type)} disabled={upgradeCost===undefined||current.resources[material]<upgradeCost}>Upgrade {type}</button>
-              <details>
-                <summary>Upgrade Menus!</summary>
-                <p>Production bonus: {variables.upgrades[current.upgrades[type]]}</p>
-                <p>Upgrade Level: {current.upgrades[type]}</p>
-                <p>Upgrade Cost: {upgradeCost === undefined ? ("Max Level") : (`${upgradeCost} ${material}`)}</p>
-              </details>
-            </div>
-          )
-        })}
-      </details>
-
-      <details className='civs'>
         <summary>Production</summary>
         <details className='civs'>
           <summary>Wood</summary>
