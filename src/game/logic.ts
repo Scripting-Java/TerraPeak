@@ -73,7 +73,9 @@ export function handlePop(current: game, type: workerType, amt: number): game {
     if (amt > 0) {
         if (totalCivs < amt)
             return current
-
+        const minCivs = Math.ceil(getTotalPopulation(current)*variables.minCivPercent/100)
+        if(totalCivs-amt<minCivs)
+            return current
         //ok this part is honestly bad so here's the important stuff
         //Random civ = You find a random civilian
         for (let i = 0; i < amt; i++) {

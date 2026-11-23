@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { civilian, game, mountainTypes, resources, workerType } from "../game/types";
+import type { game, mountainTypes, resources, workerType } from "../game/types";
 import {Users, Package, ChartNoAxesCombined, ArrowUpCircle, Mountain, Pickaxe, Trees} from "lucide-react"
 import "./Sidebar.css"
 import { Civilians } from "./sideComponents/Civilians/Civilians";

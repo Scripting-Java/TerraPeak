@@ -1,8 +1,9 @@
 import type { game, resourceType, workerType } from "../../../game/types"
 import { workTypes } from "../../../game/types"
-import { getTotalCivs } from "../../../game/helpers"
+import { getTotalCivs, getTotalPopulation } from "../../../game/helpers"
 import { variables } from "../../../game/values"
 import "./Workers.css"
+
 interface workers {
     current: game,
     onPopChange: (type: workerType, amt: number) => void,
@@ -26,10 +27,13 @@ function getMaterial(type: workerType): resourceType {
 
 export function Workers({ current, onPopChange, onUpgrade }: workers) {
     const totalCivs = getTotalCivs(current)
+    const totalPop = getTotalPopulation(current)
+    const minCivs = Math.ceil(totalPop * variables.minCivPercent / 100)
+    const assignable = Math.max(0, totalCivs - minCivs)
     return (
         <div className="workerPanel">
             <h2 className="reduceMargin">Workers</h2>
-            <p>Available Civilians: {totalCivs}</p>
+            <p>Available Civilians: {assignable}</p>
             {workTypes.map(type => {
                 const costs = getCost(type)
                 const upgradeCost = costs[current.upgrades[type]]
@@ -43,11 +47,11 @@ export function Workers({ current, onPopChange, onUpgrade }: workers) {
                             </summary>
 
                             <div className="workerInfo">
-                            <button className="workerButton" disabled={totalCivs === 0} onClick={() => onPopChange(type, 1)}>Add Worker</button>
-                            <button className="workerButton" disabled={current.population[type] === 0} onClick={() => onPopChange(type, -1)}>Remove Worker</button>
-                            <p>Upgrade Level: {current.upgrades[type]}</p>
-                            <p>Upgrade Cost: {upgradeCost === undefined ? "Max Level" : `${upgradeCost} ${material}`}</p>
-                            <button className="workerButton" disabled={upgradeCost === undefined || current.resources[(material)] < upgradeCost} onClick={() => onUpgrade(type)}>Upgrade</button>
+                                <button className="workerButton" disabled={assignable === 0} onClick={() => onPopChange(type, 1)}>Add Worker</button>
+                                <button className="workerButton" disabled={current.population[type] === 0} onClick={() => onPopChange(type, -1)}>Remove Worker</button>
+                                <p>Upgrade Level: {current.upgrades[type]}</p>
+                                <p>Upgrade Cost: {upgradeCost === undefined ? "Max Level" : `${upgradeCost} ${material}`}</p>
+                                <button className="workerButton" disabled={upgradeCost === undefined || current.resources[(material)] < upgradeCost} onClick={() => onUpgrade(type)}>Upgrade</button>
                             </div>
                         </details>
                     </div>
