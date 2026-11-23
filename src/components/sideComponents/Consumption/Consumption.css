@@ -1,0 +1,18 @@
+.consumption{
+    background-color: #263238;
+    padding: 15px;
+    border-radius: 14px;
+    color:white;
+    padding-bottom: 8px;
+}
+
+.consumption h2{
+    margin-top:0;
+}
+
+.consumption p{
+    background-color: #46565e;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
