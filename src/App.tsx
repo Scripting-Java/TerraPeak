@@ -37,12 +37,6 @@ function App() {
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
       <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
       <h2>Still Alive: {String(!current.lost)}</h2>
-      <details className='civs'>
-        <summary>Weather: {current.weather.weather}</summary>
-        <p>Farmer Buffs: {current.weather.buffs.farmers}</p>
-        <p>Lumberjack Buffs: {current.weather.buffs.lumberjacks}</p>
-        <p>Researcher Buffs: {current.weather.buffs.researcher}</p>
-      </details>
 
       <details className='civs'>
         <summary>Production</summary>

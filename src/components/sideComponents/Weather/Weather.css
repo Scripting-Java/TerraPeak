@@ -1,0 +1,24 @@
+.weather{
+    background-color: #263238;
+    padding:15px;
+    border-radius: 15px;
+    color:white;
+}
+
+.weather h2{
+    margin: top 0;
+}
+
+.weather p{
+    background-color: #46565e;
+    padding:10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.weather summary{
+    cursor: pointer;
+    padding:10px;
+}
+
+

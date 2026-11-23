@@ -1,5 +1,5 @@
-import type { game } from "../../game/types";
-import { mountains } from "../../game/mountains";
+import type { game } from "../../../game/types";
+import { mountains } from "../../../game/mountains";
 import "./Forest.css"
 interface forest{
     current:game
