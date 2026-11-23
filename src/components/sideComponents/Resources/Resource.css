@@ -1,0 +1,15 @@
+.resources{
+    background-color: #263238;
+    padding:15px;
+    border-radius: 15px;
+    color:white;
+}
+.resources h2{
+    margin-top:0;
+}
+.resources p{
+    background-color: #46565e;
+    padding:10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}

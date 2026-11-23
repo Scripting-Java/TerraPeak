@@ -63,14 +63,6 @@ function App() {
       <button className='civsButton' onClick={handleCycle}>Press Me To Run A Cycle</button>
 
       <details className='civs'>
-        <summary>Resources</summary>
-        <p>Wood: {current.resources.wood}</p>
-        <p>Gas: {current.resources.gas}</p>
-        <p>Peaches: {current.resources.peaches}</p>
-        <h2>Mountain: {current.mountain}</h2>
-      </details>
-
-      <details className='civs'>
         <summary>Mountains</summary>
         {mountains.map((mountain, index) => {
           const mountUnlocked = getTotalPopulation(current) >= variables.mountainReqs[index]

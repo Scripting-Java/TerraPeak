@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { act, useState } from "react";
 import type { game, mountainTypes, resources, workerType } from "../game/types";
 import {Users, Package, ChartNoAxesCombined, ArrowUpCircle, Mountain, Pickaxe, Trees, Cloud} from "lucide-react"
 import "./Sidebar.css"
@@ -6,6 +6,7 @@ import { Civilians } from "./sideComponents/Civilians/Civilians";
 import { Workers } from "./sideComponents/Workers/Workers";
 import { Forest } from "./sideComponents/Forest/Forest";
 import { Weather } from "./sideComponents/Weather/Weather";
+import { Resources } from "./sideComponents/Resources/Resource";
 
 interface Sidebar{
     current:game,
@@ -26,6 +27,7 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
                 <button onClick={()=>toggle("workers")} className={active==="workers"?"active":""}><Pickaxe></Pickaxe>Workers</button>
                 <button onClick={()=>toggle("forests")} className={active==="forests"?"active":""}><Trees></Trees>Forest</button>
                 <button onClick={()=>toggle("resources")} className={active==="resources"?"active":""}><Package></Package>Resources</button>
+                
                 <button onClick={()=>toggle("production")} className={active==="production"?"active":""}><ChartNoAxesCombined></ChartNoAxesCombined>Production</button>
                 <button onClick={()=>toggle("upgrades")} className={active==="upgrades"?"active":""}><ArrowUpCircle></ArrowUpCircle>Upgrades</button>
                 <button onClick={()=>toggle("mountains")} className={active==="mountains"?"active":""}><Mountain></Mountain>Mountains</button>
@@ -37,6 +39,7 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
                 {active==="workers" && <Workers current={current} onPopChange={onPopChange} onUpgrade={onUpgrade}></Workers>}
                 {active==="forests"&& <Forest current={current}></Forest>}
                 {active==="weather"&&<Weather current={current}></Weather>}
+                {active==="resources" && <Resources current={current}></Resources>}
             </div>
         </div>
     )
