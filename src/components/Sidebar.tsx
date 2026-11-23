@@ -8,6 +8,7 @@ import { Forest } from "./sideComponents/Forest/Forest";
 import { Weather } from "./sideComponents/Weather/Weather";
 import { Resources } from "./sideComponents/Resources/Resource";
 import { Consumption } from "./sideComponents/Consumption/Consumption";
+import { Production } from "./sideComponents/Production/Production";
 
 interface Sidebar{
     current:game,
@@ -42,6 +43,7 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
                 {active==="weather"&&<Weather current={current}></Weather>}
                 {active==="resources" && <Resources current={current}></Resources>}
                 {active==="consumption" && <Consumption current={current}></Consumption>}
+                {active==="production" && <Production current={current}></Production>}
             </div>
         </div>
     )

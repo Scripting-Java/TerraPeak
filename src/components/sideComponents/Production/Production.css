@@ -1,0 +1,14 @@
+.production{
+    background-color: #263238;
+    padding:15px;
+    border-radius: 15px;
+    color:white;
+    padding-bottom: 8px;
+}
+
+.production p{
+    background-color: #46565e;
+    padding:10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
