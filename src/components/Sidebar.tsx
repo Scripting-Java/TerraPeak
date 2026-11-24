@@ -1,5 +1,5 @@
-import { act, useState } from "react";
-import type { game, mountainTypes, resources, workerType } from "../game/types";
+import {useState } from "react";
+import type { game, mountainTypes, workerType } from "../game/types";
 import {Users, Package, ChartNoAxesCombined, Mountain, Pickaxe, Trees, Cloud, ArrowDown} from "lucide-react"
 import "./Sidebar.css"
 import { Civilians } from "./sideComponents/Civilians/Civilians";
@@ -13,13 +13,12 @@ import { Mountains } from "./sideComponents/Mountains/Mountains";
 
 interface Sidebar{
     current:game,
-    production: resources,
     onPopChange:(type:workerType, amt:number)=>void,
     onUpgrade:(type:workerType)=>void,
     onMountain:(mountain:mountainTypes)=>void
 }
 
-export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Sidebar){
+export function Sidebar({current,onPopChange,onUpgrade,onMountain}:Sidebar){
     const[active, setActive] = useState<string|null>(null)
     const toggle = (panel:string)=>{setActive(prev=>prev===panel?null:panel)}
 

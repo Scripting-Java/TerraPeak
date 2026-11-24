@@ -35,3 +35,14 @@
   color:black;
   border-color: rgb(243, 128, 100);
 }
+
+.disclaim{
+  padding:15px;
+  background-color: white;
+  width: fit-content;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  margin:0 auto;
+  border-radius: 12px;
+}

@@ -31,7 +31,7 @@ export const variables = {
     farmerUpgradeCosts: [30,50,100],
     researcherUpgradeCosts:[15, 40, 75],
     //tentative upgrade costs
-    mountainReqs: [0,15,30,50,75,100],
+    mountainReqs: [20,40,70,100,130,200],
     //population reqs for new mountains
     mountainBuffs: [1,1.2,1.4,1.8,2.5,3.5],
     weather:["rainy","stormy","sunny","cloudy","subZero"],

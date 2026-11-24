@@ -78,7 +78,7 @@ export function helpHandleWeather(weather:string){
     if(weather==="cloudy")
         return {farmers:0.9,lumberjacks:1.05,researcher:1.1}
     if(weather==="sunny")
-        return  {farmers:0.9,lumberjacks:0.9,researcher:0.9}
+        return  {farmers:1.2,lumberjacks:1.2,researcher:1.2}
     if(weather==="subZero")
         return  {farmers:0.6,lumberjacks:0.8,researcher:1.5}
     return {farmers:1,lumberjacks:1,researcher:1}

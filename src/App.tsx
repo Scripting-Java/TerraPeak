@@ -32,13 +32,14 @@ function App() {
 
   return (
     <div>
-      <Sidebar current={current} production={production} onPopChange={handlePopulation} onUpgrade={handleUpgrade} onMountain={handleMountains}></Sidebar>
-      <h1 className='people'>People</h1>
+      <Sidebar current={current} onPopChange={handlePopulation} onUpgrade={handleUpgrade} onMountain={handleMountains}></Sidebar>
+      <h1 className='people'>TerraPeak Simulator</h1>
+      <h2 className='people2'>(Pseudo)Simulate Populations On Mountain Peaks</h2>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
-      <h2>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
-      <h2>Still Alive: {String(!current.lost)}</h2>
-
+      <h2 className='people2'>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
+      <h2 className='people2'>Still Alive: {String(!current.lost)}</h2>
       <button className='civsButton' onClick={handleCycle}>Press Me To Run A Cycle</button>
+      <p className='disclaim'>THIS IS NOT IN ANYWAY MEANT TO REPRESENT REAL LIFE</p>
 
     </div>
   )
