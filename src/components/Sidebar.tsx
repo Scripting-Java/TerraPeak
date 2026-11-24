@@ -1,6 +1,6 @@
 import { act, useState } from "react";
 import type { game, mountainTypes, resources, workerType } from "../game/types";
-import {Users, Package, ChartNoAxesCombined, ArrowUpCircle, Mountain, Pickaxe, Trees, Cloud, ArrowDown} from "lucide-react"
+import {Users, Package, ChartNoAxesCombined, Mountain, Pickaxe, Trees, Cloud, ArrowDown} from "lucide-react"
 import "./Sidebar.css"
 import { Civilians } from "./sideComponents/Civilians/Civilians";
 import { Workers } from "./sideComponents/Workers/Workers";
@@ -9,6 +9,7 @@ import { Weather } from "./sideComponents/Weather/Weather";
 import { Resources } from "./sideComponents/Resources/Resource";
 import { Consumption } from "./sideComponents/Consumption/Consumption";
 import { Production } from "./sideComponents/Production/Production";
+import { Mountains } from "./sideComponents/Mountains/Mountains";
 
 interface Sidebar{
     current:game,
@@ -31,7 +32,6 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
                 <button onClick={()=>toggle("resources")} className={active==="resources"?"active":""}><Package></Package>Resources</button>
                 <button onClick={()=>toggle("consumption")} className={active==="consumption"?"active":""}><ArrowDown></ArrowDown>Consumption</button>
                 <button onClick={()=>toggle("production")} className={active==="production"?"active":""}><ChartNoAxesCombined></ChartNoAxesCombined>Production</button>
-                <button onClick={()=>toggle("upgrades")} className={active==="upgrades"?"active":""}><ArrowUpCircle></ArrowUpCircle>Upgrades</button>
                 <button onClick={()=>toggle("mountains")} className={active==="mountains"?"active":""}><Mountain></Mountain>Mountains</button>
                 <button onClick={()=>toggle("weather")} className={active==="weather"?"active":""}><Cloud></Cloud>Weather</button>
             </div>
@@ -44,6 +44,7 @@ export function Sidebar({current,production,onPopChange,onUpgrade,onMountain}:Si
                 {active==="resources" && <Resources current={current}></Resources>}
                 {active==="consumption" && <Consumption current={current}></Consumption>}
                 {active==="production" && <Production current={current}></Production>}
+                {active==="mountains" && <Mountains current={current} onMountain={onMountain}></Mountains>}
             </div>
         </div>
     )
