@@ -33,7 +33,7 @@ function App() {
     <div>
       <Sidebar current={current} onPopChange={handlePopulation} onUpgrade={handleUpgrade} onMountain={handleMountains}></Sidebar>
       <h1 className='people'>TerraPeak Simulator</h1>
-      <h2 className='people2'>(Pseudo)Simulate Populations On Mountain Peaks</h2>
+      <h2 className='people2'>Simulate Populations On Mountain Peaks</h2>
       <h2 className='people2'>Total Population: {getTotalPopulation(current)}</h2>
       <h2 className='people2'>Mountain Production Buff: {variables.mountainBuffs[mountains.findIndex(m => m.name === current.mountain)]} X</h2>
       <h2 className='people2'>Still Alive: {String(!current.lost)}</h2>
