@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import { workTypes, type game, type mountainTypes, type workerType } from './game/types'
-import { getResConsumption, getTotalPopulation, getWorkerProd } from './game/helpers'
+import {type game, type mountainTypes, type workerType } from './game/types'
+import {getTotalPopulation } from './game/helpers'
 import { handleMountain, handlePop, handleUpgrades, runCycle } from './game/logic'
 import { create } from './game/initial'
 import { variables } from './game/values'
@@ -11,7 +11,6 @@ import { Sidebar } from './components/Sidebar'
 function App() {
 
   const [current, setCurrent] = useState<game>(() => create())
-  const production = getWorkerProd(current, current.weather)
 
   function handleCycle() {
     setCurrent(prev => runCycle(prev))
